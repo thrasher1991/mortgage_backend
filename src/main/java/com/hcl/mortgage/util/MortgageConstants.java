@@ -2,12 +2,13 @@ package com.hcl.mortgage.util;
 
 public class MortgageConstants {
 
-	public static final String ERROR_CUSTOMER_NOT_FOUND = "No customer exists";
-
 	private MortgageConstants() {
 
 	}
 
+	public static final String ACCOUNT_NOT_FOUND = "Accounts not found";
+	public static final String INSUFFICIENT_BALANCE = "Insufficient balance in transactional account";
+	public static final String ERROR_CUSTOMER_NOT_FOUND = "No customer exists";
 	public static final String ERROR_NAME = "Your name is invalid,enter alphabets only";
 	public static final String ERROR_PHONENUMBER = "Entered Phonenumber is Invalid";
 	public static final String ERROR_EMAIL = "Email is Invalid";
