@@ -15,6 +15,11 @@ import com.hcl.mortgage.exception.CommonException;
 import com.hcl.mortgage.repository.TransactionRepository;
 import com.hcl.mortgage.util.MortgageConstants;
 
+/**
+ * 
+ * @author DeepikaSivarajan
+ *
+ */
 @Service
 public class BatchProcessServiceImpl implements BatchProcessService {
 	private static final Logger logger = LoggerFactory.getLogger(BatchProcessServiceImpl.class);
@@ -23,6 +28,11 @@ public class BatchProcessServiceImpl implements BatchProcessService {
 	@Autowired
 	AccountService accountService;
 
+	/**
+	 * This method is intended to do monthly payment periodically (every 1minute)
+	 * 
+	 * 
+	 */
 	@Override
 	public String monthlyPayment() {
 		logger.info("monthly payment in service");
@@ -39,8 +49,6 @@ public class BatchProcessServiceImpl implements BatchProcessService {
 					Account transactionalAccount = accountService.getTransactionalAccount(customerId,
 							"Transactional Account");
 					Account mortgageAccount = accountService.getMortgageAccount(customerId, "Mortgage Account");
-					if(transactionalAccount.getBalance() ==0)
-						throw new CommonException(MortgageConstants.INSUFFICIENT_BALANCE);
 					if (transactionalAccount.getBalance() >= 200 && mortgageAccount.getBalance() < 0) {
 						Double transactionalAccountBalance = transactionalAccount.getBalance() - 200;
 						Double mortgageAccountBalance = mortgageAccount.getBalance() + 200;
@@ -48,21 +56,13 @@ public class BatchProcessServiceImpl implements BatchProcessService {
 						mortgageAccount.setBalance(mortgageAccountBalance);
 						accountService.save(transactionalAccount);
 						accountService.save(mortgageAccount);
-
-						Transaction transactional = new Transaction();
-						transactional.setAccountNumber(transactionalAccount.getAccountNumber());
-						transactional.setAmount(200d);
-						transactional.setComments("Monthly deduction");
-						transactional.setTransactionDate(LocalDate.now());
-						transactional.setTransactionType("Debit");
-
-						Transaction mortgage = new Transaction();
-						mortgage.setAccountNumber(mortgageAccount.getAccountNumber());
-						mortgage.setAmount(200d);
-						mortgage.setComments("Monthly credition");
-						mortgage.setTransactionDate(LocalDate.now());
-						mortgage.setTransactionType("Credit");
-
+						Transaction transactional = Transaction.builder()
+								.accountNumber(transactionalAccount.getAccountNumber()).amount(200d)
+								.comments("Monthly deduction").transactionDate(LocalDate.now()).transactionType("Debit")
+								.build();
+						Transaction mortgage = Transaction.builder().accountNumber(mortgageAccount.getAccountNumber())
+								.amount(200d).comments("Monthly credition").transactionDate(LocalDate.now())
+								.transactionType("Credit").build();
 						transactionRepository.save(transactional);
 						transactionRepository.save(mortgage);
 						previousCustomerId = currentCustomerId;
