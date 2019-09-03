@@ -6,6 +6,10 @@ import org.springframework.stereotype.Service;
 
 import com.hcl.mortgage.dto.AccountSummaryResponseDto;
 
+/**
+ * @author Gurpreet Singh
+ *
+ */
 @Service
 public interface AccountSummaryService {
 

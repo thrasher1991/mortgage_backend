@@ -21,6 +21,10 @@ import com.hcl.mortgage.entity.Account;
 import com.hcl.mortgage.exception.CommonException;
 import com.hcl.mortgage.repository.AccountRepository;
 
+/**
+ * @author Gurpreet Singh
+ *
+ */
 @RunWith(MockitoJUnitRunner.class)
 public class AccountSummaryServiceImplTest {
 
