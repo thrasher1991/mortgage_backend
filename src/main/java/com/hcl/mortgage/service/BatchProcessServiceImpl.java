@@ -76,7 +76,7 @@ public class BatchProcessServiceImpl implements BatchProcessService {
 
 	}
 
-	@Scheduled(fixedRate = 1 * 60 * 1000)
+	//@Scheduled(fixedRate = 1 * 60 * 1000)
 	public void testSchedule() {
 		monthlyPayment();
 
