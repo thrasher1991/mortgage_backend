@@ -24,6 +24,7 @@ import com.hcl.mortgage.repository.AccountRepository;
 import com.hcl.mortgage.repository.CustomerRepository;
 import com.hcl.mortgage.repository.MortgageRepository;
 import com.hcl.mortgage.util.MortgageConstants;
+import com.hcl.mortgage.util.PasswordUtil;
 
 @Service
 public class MortgageServiceImpl implements MortgageService {
@@ -38,6 +39,9 @@ public class MortgageServiceImpl implements MortgageService {
 
 	@Autowired
 	AccountRepository accountRepository;
+
+	@Autowired
+	PasswordUtil passwordUtil;
 
 	Random rand = new Random();
 
@@ -63,7 +67,8 @@ public class MortgageServiceImpl implements MortgageService {
 		// Storing customer info into customer table
 		Customer customer = new Customer();
 		customer.setLoginId(mortgageRequestDto.getCustomerName() + LocalDate.now().getDayOfMonth());
-		customer.setPassword(generatePassword());
+		String pwd = generatePassword();
+		customer.setPassword(passwordUtil.encodePassword(pwd));
 		customer.setCustomerName(mortgageRequestDto.getCustomerName());
 		Customer customerDb = customerRepository.save(customer);
 
@@ -92,7 +97,7 @@ public class MortgageServiceImpl implements MortgageService {
 		LOGGER.info("Mortage Registered Successfully");
 		MortgageResponseDto mortgageResponseDTO = new MortgageResponseDto();
 		mortgageResponseDTO.setLoginId(customerDb.getLoginId());
-		mortgageResponseDTO.setPassword(customerDb.getPassword());
+		mortgageResponseDTO.setPassword(pwd);
 		mortgageResponseDTO.setCustomerName(customerDb.getCustomerName());
 		mortgageResponseDTO.setTransactionAccountNumer(transactionAccount.getAccountNumber());
 		mortgageResponseDTO.setMortageAccountNumber(mortgageAccount.getAccountNumber());
@@ -112,10 +117,9 @@ public class MortgageServiceImpl implements MortgageService {
 	}
 
 	private boolean validPhoneNumber(String number) {
-		String num = number.toString();
 		Pattern p = Pattern.compile("^[0-9]{10}$");
-		Matcher m = p.matcher(num);
-		return (m.find() && m.group().equals(num));
+		Matcher m = p.matcher(number);
+		return (m.find() && m.group().equals(number));
 	}
 
 	public int calculateAge(String birhtDate) {
@@ -142,23 +146,23 @@ public class MortgageServiceImpl implements MortgageService {
 		final String specialChars = "!@#$%^&*_=+-/";
 		int length = 5;
 		String dic = alphaCaps + alpha + numeric + specialChars;
-		String result = "";
+		StringBuilder result = new StringBuilder();
 		for (int i = 0; i < length; i++) {
 			int index = r.nextInt(dic.length());
-			result += dic.charAt(index);
+			result .append(dic.charAt(index));
 		}
 
-		return result;
+		return result.toString();
 	}
 
 	public String accountNumber() {
 
-		String number = "";
+		StringBuilder number = new StringBuilder();
 		for (int i = 0; i < 14; i++) {
 			int n = rand.nextInt(10) + 0;
-			number += Integer.toString(n);
+			number .append(Integer.toString(n));
 		}
-		return number;
+		return number.toString();
 
 	}
 
