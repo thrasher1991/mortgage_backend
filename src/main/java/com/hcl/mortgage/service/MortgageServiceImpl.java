@@ -23,6 +23,7 @@ import com.hcl.mortgage.exception.CommonException;
 import com.hcl.mortgage.repository.AccountRepository;
 import com.hcl.mortgage.repository.CustomerRepository;
 import com.hcl.mortgage.repository.MortgageRepository;
+import com.hcl.mortgage.util.EmailSender;
 import com.hcl.mortgage.util.MortgageConstants;
 import com.hcl.mortgage.util.PasswordUtil;
 
@@ -42,6 +43,9 @@ public class MortgageServiceImpl implements MortgageService {
 
 	@Autowired
 	PasswordUtil passwordUtil;
+
+	@Autowired
+	EmailSender emailSender;
 
 	Random rand = new Random();
 
@@ -102,6 +106,8 @@ public class MortgageServiceImpl implements MortgageService {
 		mortgageResponseDTO.setTransactionAccountNumer(transactionAccount.getAccountNumber());
 		mortgageResponseDTO.setMortageAccountNumber(mortgageAccount.getAccountNumber());
 		mortgageResponseDTO.setMessage("Accoutn created successfully");
+
+		emailSender.sendMail(mortgageResponseDTO, mortgageRequestDto.getEmail());
 		return mortgageResponseDTO;
 	}
 
@@ -149,7 +155,7 @@ public class MortgageServiceImpl implements MortgageService {
 		StringBuilder result = new StringBuilder();
 		for (int i = 0; i < length; i++) {
 			int index = r.nextInt(dic.length());
-			result .append(dic.charAt(index));
+			result.append(dic.charAt(index));
 		}
 
 		return result.toString();
@@ -160,7 +166,7 @@ public class MortgageServiceImpl implements MortgageService {
 		StringBuilder number = new StringBuilder();
 		for (int i = 0; i < 14; i++) {
 			int n = rand.nextInt(10) + 0;
-			number .append(Integer.toString(n));
+			number.append(Integer.toString(n));
 		}
 		return number.toString();
 
