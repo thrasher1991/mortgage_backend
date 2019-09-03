@@ -1,8 +1,7 @@
 package com.hcl.mortgage.util;
-
 import java.util.Base64;
-
 import org.springframework.stereotype.Component;
+
 @Component
 public class PasswordUtil {
 	public String encodePassword(String password) {
