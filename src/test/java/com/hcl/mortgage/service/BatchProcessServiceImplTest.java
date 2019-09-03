@@ -35,8 +35,8 @@ public class BatchProcessServiceImplTest {
 
 	@Before
 	public void setUp() {
-		transactional = new Transaction(1, 200d, LocalDate.now(), "Debit", "Monthly deduction", "ACC82163067271854");
-		mortgage = new Transaction(2, 200d, LocalDate.now(), "Credit", "Monthly credition", "MRT73189768086149");
+		transactional = new Transaction(1, 200d, LocalDate.now(), "Debit", "Monthly deduction", "ACC82163067271854",10000D);
+		mortgage = new Transaction(2, 200d, LocalDate.now(), "Credit", "Monthly credition", "MRT73189768086149",10000D);
 		accountList = new ArrayList<>();
 		account = new Account();
 //		account.setAccountId(1);

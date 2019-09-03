@@ -59,10 +59,10 @@ public class BatchProcessServiceImpl implements BatchProcessService {
 						Transaction transactional = Transaction.builder()
 								.accountNumber(transactionalAccount.getAccountNumber()).amount(200d)
 								.comments("Monthly deduction").transactionDate(LocalDate.now()).transactionType("Debit")
-								.build();
+								.closingBalance(transactionalAccountBalance).build();
 						Transaction mortgage = Transaction.builder().accountNumber(mortgageAccount.getAccountNumber())
 								.amount(200d).comments("Monthly credition").transactionDate(LocalDate.now())
-								.transactionType("Credit").build();
+								.transactionType("Credit").closingBalance(mortgageAccountBalance).build();
 						transactionRepository.save(transactional);
 						transactionRepository.save(mortgage);
 						previousCustomerId = currentCustomerId;

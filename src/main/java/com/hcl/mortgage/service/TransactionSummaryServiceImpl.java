@@ -41,12 +41,13 @@ public class TransactionSummaryServiceImpl implements TransactionSummaryService 
 			throw new CommonException(MortgageConstants.ERROR_NO_TRANSACTION_FOUND);
 		transactionList.stream().forEach(t -> {
 			TransactionSummaryResponseDto transactionSummaryResponseDto = new TransactionSummaryResponseDto();
-			transactionSummaryResponseDto.setAccountNumber(transactionList.get(0).getAccountNumber());
-			transactionSummaryResponseDto.setAmount(transactionList.get(0).getAmount());
-			transactionSummaryResponseDto.setComments(transactionList.get(0).getComments());
-			transactionSummaryResponseDto.setTransactionDate(transactionList.get(0).getTransactionDate());
-			transactionSummaryResponseDto.setTransactionId(transactionList.get(0).getTransactionId());
-			transactionSummaryResponseDto.setTransactionType(transactionList.get(0).getTransactionType());
+			transactionSummaryResponseDto.setAccountNumber(t.getAccountNumber());
+			transactionSummaryResponseDto.setAmount(t.getAmount());
+			transactionSummaryResponseDto.setComments(t.getComments());
+			transactionSummaryResponseDto.setTransactionDate(t.getTransactionDate());
+			transactionSummaryResponseDto.setTransactionId(t.getTransactionId());
+			transactionSummaryResponseDto.setTransactionType(t.getTransactionType());
+			transactionSummaryResponseDto.setClosingBalance(t.getClosingBalance());
 			BeanUtils.copyProperties(t, transactionSummaryResponseDto);
 			responseList.add(transactionSummaryResponseDto);
 

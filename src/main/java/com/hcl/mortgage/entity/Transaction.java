@@ -33,5 +33,6 @@ public class Transaction implements Serializable {
 	private String transactionType;
 	private String comments;
 	private String accountNumber;
+	private Double closingBalance;
 
 }
