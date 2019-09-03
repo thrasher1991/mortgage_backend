@@ -1,16 +1,12 @@
 package com.hcl.mortgage.service;
 
-import java.util.Random;
-
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
-import org.springframework.beans.factory.annotation.Autowired;
 
-import com.hcl.mortgage.controller.LoginController;
 import com.hcl.mortgage.dto.MortgageRequestDto;
 import com.hcl.mortgage.repository.AccountRepository;
 import com.hcl.mortgage.repository.CustomerRepository;
