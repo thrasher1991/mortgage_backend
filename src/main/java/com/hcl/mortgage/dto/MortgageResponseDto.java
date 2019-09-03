@@ -11,15 +11,13 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class MortgageRequestDto implements Serializable {
+public class MortgageResponseDto implements Serializable {
 	private static final long serialVersionUID = 1L;
-	private String operationType;
-	private Double propertyCost;
-	private Double deposit;
-	private String occupation;
+	private String message;
+	private String loginId;
+	private String password;
+	private String transactionAccountNumer;
+	private String mortageAccountNumber;
 	private String customerName;
-	private String dateOfBirth;
-	private String phoneNumber;
-	private String email;
 
 }
