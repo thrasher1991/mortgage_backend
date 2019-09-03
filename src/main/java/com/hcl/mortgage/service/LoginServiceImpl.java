@@ -33,7 +33,6 @@ public class LoginServiceImpl implements LoginService {
 				passwordUtil.encodePassword(loginDto.getPassword()));
 		if (!customer.isPresent())
 			throw new CommonException(MortgageConstants.USER_NOT_FOUND);
-
 		loginResponseDto.setMessage("Login success..");
 		loginResponseDto.setCustomerId(customer.get().getCustomerId());
 		return loginResponseDto;
