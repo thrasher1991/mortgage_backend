@@ -118,7 +118,6 @@ public class MortgageServiceImpl implements MortgageService {
 		mortgageResponseDTO.setMortageAccountNumber(mortgageAccount.getAccountNumber());
 		mortgageResponseDTO.setMessage("Account created successfully");
 
-		 emailSender.sendMail(mortgageResponseDTO, mortgageRequestDto.getEmail());
 		return mortgageResponseDTO;
 	}
 
