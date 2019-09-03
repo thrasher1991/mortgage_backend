@@ -10,5 +10,5 @@ import com.hcl.mortgage.entity.Customer;
 @Repository
 public interface CustomerRepository extends JpaRepository<Customer, Integer> {
 
-	public Optional<Customer> findByLoginId(String loginId);
+	public Optional<Customer> findByLoginIdAndPassword(String loginId,String password );
 }

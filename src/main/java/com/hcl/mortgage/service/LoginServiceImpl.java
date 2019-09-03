@@ -13,27 +13,28 @@ import com.hcl.mortgage.entity.Customer;
 import com.hcl.mortgage.exception.CommonException;
 import com.hcl.mortgage.repository.CustomerRepository;
 import com.hcl.mortgage.util.MortgageConstants;
-
+import com.hcl.mortgage.util.PasswordUtil;
 
 @Service
-public class LoginServiceImpl implements LoginService{
+public class LoginServiceImpl implements LoginService {
 
 	private static final Logger logger = LoggerFactory.getLogger(LoginServiceImpl.class);
-	@Autowired CustomerRepository customerRepository;	
+	@Autowired
+	CustomerRepository customerRepository;
 	
+	@Autowired
+	PasswordUtil passwordUtil;
+
 	@Override
 	public LoginResponseDto loginUser(LoginDto loginDto) {
 		LoginResponseDto loginResponseDto = new LoginResponseDto();
 		logger.info("inside the loginUser method..");
-		Optional<Customer> customer = customerRepository.findByLoginId(loginDto.getLoginId());
+		Optional<Customer> customer = customerRepository.findByLoginIdAndPassword(loginDto.getLoginId(),
+				passwordUtil.encodePassword(loginDto.getPassword()));
 		if (!customer.isPresent())
 			throw new CommonException(MortgageConstants.USER_NOT_FOUND);
-				
-		if (customer.get().getLoginId().equalsIgnoreCase(loginDto.getLoginId())
-			&& customer.get().getPassword().equals(loginDto.getPassword())) {
-			loginResponseDto.setMessage("Login success..");
-			loginResponseDto.setCustomerId(customer.get().getCustomerId());
-	}
+		loginResponseDto.setMessage("Login success..");
+		loginResponseDto.setCustomerId(customer.get().getCustomerId());
 		return loginResponseDto;
-}
+	}
 }
