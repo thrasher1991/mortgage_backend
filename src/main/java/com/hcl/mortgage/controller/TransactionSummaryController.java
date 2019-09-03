@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.hcl.mortgage.dto.TransactionSummaryResponseDto;
+import com.hcl.mortgage.service.TransactionSummaryService;
 import com.hcl.mortgage.service.TransactionSummaryServiceImpl;
 
 
@@ -29,7 +30,7 @@ public class TransactionSummaryController {
 	private static final Logger logger = LoggerFactory.getLogger(TransactionSummaryController.class);
 
 	@Autowired
-	TransactionSummaryServiceImpl transactionSummaryServiceImpl;
+	TransactionSummaryService transactionSummaryServiceImpl;
 
 	/**
 	 * This method is use to get transaction summary of a customer based on account
