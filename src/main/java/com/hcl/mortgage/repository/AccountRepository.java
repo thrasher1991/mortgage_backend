@@ -3,9 +3,9 @@ package com.hcl.mortgage.repository;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import com.hcl.mortgage.entity.Mortgage;
+import com.hcl.mortgage.entity.Account;
 
 @Repository
-public interface MortgageRepository extends JpaRepository<Mortgage, Integer> {
+public interface AccountRepository extends JpaRepository<Account, Integer> {
 
 }
