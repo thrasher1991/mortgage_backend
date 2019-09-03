@@ -10,6 +10,9 @@ import org.springframework.stereotype.Service;
 import com.hcl.mortgage.entity.Account;
 import com.hcl.mortgage.repository.AccountRepository;
 
+/**
+ * @author DeepikaSivarajan
+ */
 @Service
 public class AccountServiceImpl implements AccountService {
 	private static final Logger logger = LoggerFactory.getLogger(AccountServiceImpl.class);
