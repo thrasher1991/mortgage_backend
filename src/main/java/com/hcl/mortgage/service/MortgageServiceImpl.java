@@ -49,6 +49,17 @@ public class MortgageServiceImpl implements MortgageService {
 
 	Random rand = new Random();
 
+	/**
+	 * This method will create the mortgage accounts
+	 * 
+	 * @param MortgageRequestDto it is the request object which contains
+	 *                           operationType,propertyCost,deposit,occupation,customerName,dateOfBirth,phoneNumber
+	 *                           and email
+	 * @return it returns MortgageResponseDto object it contains Customer
+	 *         LoginId,MortgageAccount number and Transaction Account number
+	 * 
+	 */
+
 	@Override
 	public MortgageResponseDto createMortgage(MortgageRequestDto mortgageRequestDto) {
 
@@ -105,9 +116,9 @@ public class MortgageServiceImpl implements MortgageService {
 		mortgageResponseDTO.setCustomerName(customerDb.getCustomerName());
 		mortgageResponseDTO.setTransactionAccountNumer(transactionAccount.getAccountNumber());
 		mortgageResponseDTO.setMortageAccountNumber(mortgageAccount.getAccountNumber());
-		mortgageResponseDTO.setMessage("Accoutn created successfully");
+		mortgageResponseDTO.setMessage("Account created successfully");
 
-		//emailSender.sendMail(mortgageResponseDTO, mortgageRequestDto.getEmail());
+		 emailSender.sendMail(mortgageResponseDTO, mortgageRequestDto.getEmail());
 		return mortgageResponseDTO;
 	}
 
