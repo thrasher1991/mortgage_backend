@@ -15,6 +15,10 @@ import com.hcl.mortgage.repository.CustomerRepository;
 import com.hcl.mortgage.util.MortgageConstants;
 import com.hcl.mortgage.util.PasswordUtil;
 
+/**
+ * @author Venkat . This is the service class for login the customer
+ *
+ */
 @Service
 public class LoginServiceImpl implements LoginService {
 
@@ -25,6 +29,14 @@ public class LoginServiceImpl implements LoginService {
 	@Autowired
 	PasswordUtil passwordUtil;
 
+	/**
+	 * This method is use to login the customer
+	 * 
+	 * @param LoginDto is the input parameter which contains loginId and password.
+	 * @return LoginResponseDto is the output parameter which contains customerId
+	 *         and message with status code.
+	 * @exception  USER_NOT_FOUND if no user is found
+	 */
 	@Override
 	public LoginResponseDto loginUser(LoginDto loginDto) {
 		LoginResponseDto loginResponseDto = new LoginResponseDto();

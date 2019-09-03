@@ -185,9 +185,7 @@ public class MortgageServiceImpl implements MortgageService {
 
 	public LocalDate getLocalDate(String data) {
 		DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern(MortgageConstants.DATE_FORMAT);
-		LocalDate dateOfJoiningLocalDate = LocalDate.parse(data, dateTimeFormatter);
-		return dateOfJoiningLocalDate;
-
+		return LocalDate.parse(data, dateTimeFormatter);
 	}
 
 }
